@@ -77,7 +77,8 @@ if __name__ == '__main__':
         except Exception as e:
             print(f"Exception occurred in 'future_list' list comprehension: {e}")
 
-    for future, vps_info, id in future_list:
+    for future, vps_info, id in concurrent.futures.as_completed(future_list):
+    #for future, vps_info, id in future_list:
         try:
             result = future.result()
         except Exception as error:
