@@ -76,4 +76,4 @@ if __name__ == '__main__':
         except Exception as error:
             print(error)
         else:
-            print(f"Resultado : {deploy.args}")
+            print(f"Resultado : {result}")
