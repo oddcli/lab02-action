@@ -83,7 +83,7 @@ if __name__ == '__main__':
 
     for future, vps_info, id in future_list:
         try:
-            result = future.result(timeout=5)  # espere até 5 segundos pelo resultado
+            result = future.result()
         except Exception as error:
             # Captura qualquer exceção lançada pela função deploy
             print(f"[!] Erro ao executar o comando no VPS: {vps_info['address']}, Thread id: {id} {error}")
