@@ -44,13 +44,14 @@ def deploy(vps_info, username, command, ssh_key):
     except Exception as e:
         print(e.message)
 
+"""
 def listar_metodos(objeto):
     # Lista todos os elementos (métodos e atributos) da instância
     todos_elementos = dir(objeto)
     # Filtra a lista para incluir apenas os métodos
     metodos = [elem for elem in todos_elementos if callable(getattr(objeto, elem))]
     return metodos
-
+"""
 
 if __name__ == '__main__':
 
@@ -75,20 +76,17 @@ if __name__ == '__main__':
     with concurrent.futures.ThreadPoolExecutor() as executor:
         try:
             future_list = [executor.submit(deploy, vps_info, username, deploy_command, ssh_key) for vps_info in vps_list]
+            ## DEBUG ###########################################
+            print(future_list)
+            
         except Exception as e:
             print(f"Exception occurred in 'future_list' list comprehension: {e}")
 
     for future in concurrent.futures.as_completed(future_list):
-        
-        #### DEBUG
-        m = listar_metodos(future)
-        #### DEBUG
-        
         
         try:
             result = future.result()
         except Exception as error:
             print(error)
         else:
-            #print(f"Resultado : {result}")
-            print(f"Resultado : {result} {m}")
+            print(f"Resultado : {result}")
