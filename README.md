@@ -28,7 +28,9 @@ The action reads the configuration files and then connects to each VPS in the li
 
 Assuming we have the following configuration files:
 
-- __`deploy_commands.sh`__ *(a pseudo nginx deploy)*.
+#### __`deploy_commands.sh`__ *(a pseudo nginx deploy in this example)*.
+
+A `deploy_commands.sh` is a plain text file that contains a shell script to be executed on the VPS.
 
 ```bash
 # update package list and install NGINX
@@ -53,8 +55,15 @@ EOF
 systemctl restart nginx
 
 ```
+---
 
-- __`vps_list.json`__ *(hosts to perform command execution of __deploy_commands.sh__ file)*.
+#### __`vps_list.json`__ *(hosts to perform command execution of __deploy_commands.sh__ file)*.
+
+A `vps_list.json` is a JSON file that contains a list of dictionaries, each dictionary representing a VPS. The dictionary should contain the following keys:
+
+ - __address__: IP address or domain name of the VPS
+ - __port__: SSH port number of the VPS
+ - __pwd__: login password for the VPS (optional)
 
 ```json
 [
@@ -71,8 +80,9 @@ systemctl restart nginx
 ]
 
 ```
+---
 
-We can use the action as follows:
+#### We can use the action as follows:
 
 ```yml
 - name: Deploy
