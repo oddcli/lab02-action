@@ -11,7 +11,7 @@ def threaded(func):
             try:
                 result = executor.submit(func, *args, **kwargs)
             except Exception as e:
-                print("Exception occurred in 'executor.submit' on '@threaded' decorator:", e)
+                print(f"Exception occurred in 'executor.submit' on '@threaded' decorator: {e}")
         return result
     return wrapper
 
@@ -23,17 +23,26 @@ def deploy(vps_info, username, command, ssh_key):
 
         if ssh_key:
             pkey = paramiko.RSAKey.from_private_key(io.StringIO(ssh_key))
-            ssh_client.connect(vps_info['address'], port=vps_info['port'], pkey=pkey, username=username)
+            try:
+                ssh_client.connect(vps_info['address'], port=vps_info['port'], pkey=pkey, username=username)
+            except Exception as e:
+                print(f"SSH error by KEY auth: {e.message}")
+
         else:
-            ssh_client.connect(vps_info['address'], port=vps_info['port'], password=vps_info['pwd'], username=username)
-    except Exception as error:
-        print(error.message)
+            try:
+                ssh_client.connect(vps_info['address'], port=vps_info['port'], password=vps_info['pwd'], username=username)
+            except Exception as e:
+                print(f"SSH error by PASSWORD auth: {e.message}")
+
+    except Exception as e:
+        print(e.message)
+
     try:
         stdin, stdout, stderr = ssh_client.exec_command(command)
         for line in stdout:
             print(line)
-    except Exception as error:
-        print(error.message)
+    except Exception as e:
+        print(e.message)
 
 if __name__ == '__main__':
 
@@ -59,9 +68,7 @@ if __name__ == '__main__':
         try:
             future_list = [executor.submit(deploy, vps_info, username, deploy_command, ssh_key) for vps_info in vps_list]
         except Exception as e:
-            print("Exception occurred in 'future_list' list comprehension:", e)
-        
-        #future_list = [executor.submit(deploy, vps_info, username, deploy_command, ssh_key) for vps_info in vps_list]
+            print(f"Exception occurred in 'future_list' list comprehension: {e}")
 
     for future in concurrent.futures.as_completed(future_list):
         try:
@@ -70,4 +77,3 @@ if __name__ == '__main__':
             print(error)
         else:
             print(result)
-            
