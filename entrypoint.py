@@ -36,15 +36,19 @@ def deploy(vps_info, username, command, ssh_key):
 
     except Exception as e:
         print(e.message)
-
+    """
     try:
         stdin, stdout, stderr = ssh_client.exec_command(command)
         for line in stdout:
             print(line)
     except Exception as e:
         print(e.message)
-
-
+    """
+    stdin, stdout, stderr = ssh_client.exec_command(command)
+    for line in stdout:
+        print(line)
+        
+        
 if __name__ == '__main__':
 
     vps_list_file = os.environ["VPS_LIST_FILE"]
