@@ -80,14 +80,22 @@ if __name__ == '__main__':
     
     for future, vps_info, id in future_list:
         try:
-            result = future.result(timeout=4)
-        except Exception as error:
+            result = future.result()
+            if not result.exception():
+                print(f"Exito ao executar o comando no VPS: {vps_info['address']}:{vps_info['port']}, Thread id: {id} {result}")
+            else:
+                print(f"[!] Erro ao executar o comando no VPS: {vps_info['address']}:{vps_info['port']}, Thread id: {id} {error}")
+        except Exception as e:
             # Captura qualquer exceção lançada pela função deploy
-            print(f"[!] Erro ao executar o comando no VPS: {vps_info['address']}:{vps_info['port']}, Thread id: {id} {error}")
-            raise error
-        else:
+            print(f"[!] Erro na thread id: {id} VPS: {vps_info['address']}:{vps_info['port']}, Erro: {e}")
+        """
+        if not result.exception():
             print(f"Exito ao executar o comando no VPS: {vps_info['address']}:{vps_info['port']}, Thread id: {id} {result}")
-     ### POC end
+        else:
+            print(f"[!] Erro ao executar o comando no VPS: {vps_info['address']}:{vps_info['port']}, Thread id: {id} {error}")
+        """
+    
+    ### POC end
     
     """
     with concurrent.futures.ThreadPoolExecutor() as executor:
