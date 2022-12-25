@@ -16,7 +16,7 @@
   },
   {
     "address": "srv02.infosec.dev.br",
-    "port": 22,
+    "port": 2222,
     "pwd": "s3cr3t"
   },
     {
