@@ -87,9 +87,9 @@ if __name__ == '__main__':
             print(f"[!] Erro na thread id: {id}, VPS: {vps_info['address']}:{vps_info['port']}, Erro: {e}")
         
         if not result.exception():
-            print(f"Exito ao executar o comando no VPS: {vps_info['address']}:{vps_info['port']}, Thread id: {id}, {result}")
+            print(f"Exito ao executar o comando no VPS: {vps_info['address']}:{vps_info['port']}, Thread id: {id}, {result.state}")
         else:
-            print(f"[!] Erro ao executar o comando no VPS: {vps_info['address']}:{vps_info['port']}, Thread id: {id}, {result}")
+            print(f"[!] Erro ao executar o comando no VPS: {vps_info['address']}:{vps_info['port']}, Thread id: {id}, {result.state}")
         
     
     ### POC end
