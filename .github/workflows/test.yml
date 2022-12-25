@@ -1,0 +1,27 @@
+name: Test VPS Deployment Action
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+    - name: Install dependencies
+      run: |
+        python -m pip install -U -r requirements.txt
+    - name: Test lab01_action
+      env:
+        VPS_LIST_FILE: vps_list.json
+        DEPLOY_COMMAND: deploy_commands.sh
+        SSH_KEY: ${{ secrets.SSH_KEY }}
+        USERNAME: ${{ secrets.USERNAME }}
+      run: |
+        python entrypoint.py
+        # Add additional test commands here
+        
