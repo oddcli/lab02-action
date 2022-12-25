@@ -91,7 +91,7 @@ if __name__ == '__main__':
             print(f"Erro ao executar o comando no VPS {id}: {result}")
      ### POC end
     
- """
+    """
     with concurrent.futures.ThreadPoolExecutor() as executor:
         try:
             future_list = [executor.submit(deploy, vps_info, username, deploy_command, ssh_key) for vps_info in vps_list]
@@ -109,4 +109,4 @@ if __name__ == '__main__':
             print(error)
         else:
             print(f"Resultado : {result}")
-"""
+    """
