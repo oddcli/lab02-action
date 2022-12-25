@@ -77,10 +77,10 @@ if __name__ == '__main__':
         except Exception as e:
             print(f"Exception occurred in 'future_list' list comprehension: {e}")
 
-    for future, vps_info, id in concurrent.futures.as_completed(future_list):
-    #for future, vps_info, id in future_list:
+    
+    for future, vps_info, id in future_list:
         try:
-            result = future.result()
+            result = future.result(timeout=4)
         except Exception as error:
             # Captura qualquer exceção lançada pela função deploy
             print(f"[!] Erro ao executar o comando no VPS: {vps_info['address']}:{vps_info['port']}, Thread id: {id} {error}")
