@@ -72,7 +72,26 @@ if __name__ == '__main__':
                 deploy_command = f.read()
     except:
         print("Error reading deploy commands")
+    
 
+    ### POC start
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        try:
+            future_list = [(executor.submit(deploy, vps_info, username, deploy_command, ssh_key), vps_info, id) for id, vps_info in enumerate(vps_list)]
+        except Exception as e:
+            print(f"Exception occurred in 'future_list' list comprehension: {e}")
+
+    for future, vps_info, id in future_list:
+        try:
+            result = future.result(timeout=5)  # espere até 5 segundos pelo resultado
+        except Exception as error:
+            # Captura qualquer exceção lançada pela função deploy
+            print(f"Erro ao executar o comando no VPS {id}: {error}")
+        else:
+            print(f"Erro ao executar o comando no VPS {id}: {result}")
+     ### POC end
+    
+ """
     with concurrent.futures.ThreadPoolExecutor() as executor:
         try:
             future_list = [executor.submit(deploy, vps_info, username, deploy_command, ssh_key) for vps_info in vps_list]
@@ -90,3 +109,4 @@ if __name__ == '__main__':
             print(error)
         else:
             print(f"Resultado : {result}")
+"""
