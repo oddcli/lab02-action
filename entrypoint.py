@@ -76,4 +76,4 @@ if __name__ == '__main__':
         except Exception as error:
             print(error)
         else:
-            print(f"Resultado : {result} {future.args}")
+            print(f"Resultado : {result} {result.args}")
