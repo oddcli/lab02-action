@@ -4,7 +4,6 @@ import io
 import paramiko
 import concurrent.futures
 
-
 def threaded(func):
     def wrapper(*args, **kwargs):
         with concurrent.futures.ThreadPoolExecutor() as executor:
@@ -36,14 +35,7 @@ def deploy(vps_info, username, command, ssh_key):
 
     except Exception as e:
         print(e.message)
-    """
-    try:
-        stdin, stdout, stderr = ssh_client.exec_command(command)
-        for line in stdout:
-            print(line)
-    except Exception as e:
-        print(e.message)
-    """
+
     stdin, stdout, stderr = ssh_client.exec_command(command)
     for line in stdout:
         print(line)
@@ -68,15 +60,12 @@ if __name__ == '__main__':
                 deploy_command = f.read()
     except:
         print("Error reading deploy commands")
-    
 
-    ### POC start
     with concurrent.futures.ThreadPoolExecutor() as executor:
         try:
             future_list = [(executor.submit(deploy, vps_info, username, deploy_command, ssh_key), vps_info, id) for id, vps_info in enumerate(vps_list)]
         except Exception as e:
             print(f"Exception occurred in 'future_list' list comprehension: {e}")
-
     
     for future, vps_info, id in future_list:
         try:
@@ -87,29 +76,6 @@ if __name__ == '__main__':
             print(f"[!] Erro na thread id: {id}, VPS: {vps_info['address']}:{vps_info['port']}, Erro: {e}")
         
         if not result.exception():
-            print(f"Exito ao executar o comando no VPS: {vps_info['address']}:{vps_info['port']}, Thread id: {id}, {result}")
+            print(f"[OK] Exito na execucao do VPS: {vps_info['address']}:{vps_info['port']}, Thread id: {id}, {result}")
         else:
-            print(f"[!] Erro ao executar o comando no VPS: {vps_info['address']}:{vps_info['port']}, Thread id: {id}, {result}")
-        
-    
-    ### POC end
-    
-    """
-    with concurrent.futures.ThreadPoolExecutor() as executor:
-        try:
-            future_list = [executor.submit(deploy, vps_info, username, deploy_command, ssh_key) for vps_info in vps_list]
-            ## DEBUG ###########################################
-            print(future_list)
-            
-        except Exception as e:
-            print(f"Exception occurred in 'future_list' list comprehension: {e}")
-
-    for future in concurrent.futures.as_completed(future_list):
-        
-        try:
-            result = future.result()
-        except Exception as error:
-            print(error)
-        else:
-            print(f"Resultado : {result}")
-    """
+            print(f"[!] Erro ao executar no VPS: {vps_info['address']}:{vps_info['port']}, Thread id: {id}, {result}")
