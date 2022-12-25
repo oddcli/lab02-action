@@ -54,7 +54,7 @@ if __name__ == '__main__':
         print("Error reading deploy commands")
 
     with concurrent.futures.ThreadPoolExecutor() as executor:
-        future_list = [executor.submit(deploy, vps_info, username, command, ssh_key) for vps_info in vps_list]
+        future_list = [executor.submit(deploy, vps_info, username, deploy_command, ssh_key) for vps_info in vps_list]
 
     for future in concurrent.futures.as_completed(future_list):
         try:
