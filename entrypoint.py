@@ -8,10 +8,12 @@ import concurrent.futures
 def threaded(func):
     def wrapper(*args, **kwargs):
         with concurrent.futures.ThreadPoolExecutor() as executor:
-            result = executor.submit(func, *args, **kwargs)
+            try:
+                result = executor.submit(func, *args, **kwargs)
+            except Exception as e:
+                print("Exception occurred:", e)
         return result
     return wrapper
-
 
 @threaded
 def deploy(vps_info, username, command, ssh_key):
