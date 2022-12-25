@@ -1,0 +1,36 @@
+name: Deploy to VPS
+description: Deploys a software update to a list of VPS servers.
+inputs:
+  vps_list_file:
+    description: Path to a JSON file containing a list of VPS servers.
+    required: true
+  deploy_command:
+    description: Command or file path to run to deploy the software update.
+    required: true
+  ssh_key:
+    description: SSH key to use for authentication.
+    required: false
+  username:
+    description: Username to use for authentication.
+    required: true
+outputs:
+  deployment_output:
+    description: Output from the deployment command.
+runs:
+  using: docker
+  image: docker://./
+  args:
+    - entrypoint.py
+  dockerfile: |
+    # Use an official Python runtime as a base image
+    FROM python:3.9
+    # Set the working directory
+    WORKDIR /app
+    # Install requirements.txt
+    RUN pip install -U -r requirements.txt
+    # Copy the entrypoint script and make it executable
+    COPY entrypoint.py .
+    RUN chmod +x entrypoint.py
+    # Set the entrypoint script as the default command
+    ENTRYPOINT ["./entrypoint.py"]
+    
