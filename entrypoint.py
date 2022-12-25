@@ -2,8 +2,18 @@ import json
 import os
 import io
 import paramiko
+import concurrent.futures
 
 
+def threaded(func):
+    def wrapper(*args, **kwargs):
+        with concurrent.futures.ThreadPoolExecutor() as executor:
+            result = executor.submit(func, *args, **kwargs)
+        return result
+    return wrapper
+
+
+@threaded
 def deploy(vps_info, username, command, ssh_key):
     try:
         ssh_client = paramiko.SSHClient()
