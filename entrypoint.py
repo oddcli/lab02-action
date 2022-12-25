@@ -24,13 +24,13 @@ def deploy(vps_info, username, command, ssh_key):
         if ssh_key:
             pkey = paramiko.RSAKey.from_private_key(io.StringIO(ssh_key))
             try:
-                ssh_client.connect(vps_info['address'], port=vps_info['port'], pkey=pkey, username=username)
+                ssh_client.connect(vps_info['address'], port=vps_info['port'], pkey=pkey, username=username, timeout=5)
             except Exception as e:
                 print(f"SSH error by KEY auth: {e.message}")
 
         else:
             try:
-                ssh_client.connect(vps_info['address'], port=vps_info['port'], password=vps_info['pwd'], username=username)
+                ssh_client.connect(vps_info['address'], port=vps_info['port'], password=vps_info['pwd'], username=username, timeout=5)
             except Exception as e:
                 print(f"SSH error by PASSWORD auth: {e.message}")
 
