@@ -76,4 +76,4 @@ if __name__ == '__main__':
         except Exception as error:
             print(error)
         else:
-            print(result)
+            print(f"Resultado : {result} {vps_info}")
