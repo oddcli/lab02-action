@@ -86,9 +86,9 @@ if __name__ == '__main__':
             result = future.result(timeout=5)  # espere até 5 segundos pelo resultado
         except Exception as error:
             # Captura qualquer exceção lançada pela função deploy
-            print(f"Erro ao executar o comando no VPS {id}: {error}")
+            print(f"[!] Erro ao executar o comando no VPS: {vps_info['address']}, Thread id: {id} {error}")
         else:
-            print(f"Erro ao executar o comando no VPS {id}: {result}")
+            print(f"Exito ao executar o comando no VPS: {vps_info['address']}, Thread id: {id} {result}")
      ### POC end
     
     """
