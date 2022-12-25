@@ -5,6 +5,16 @@
     "pwd": "s3cr3t"
   },
   {
+    "address": "srv01.infosec.dev.br",
+    "port": 22,
+    "pwd": "s3cr3t"
+  },
+  {
+    "address": "srv01.infosec.dev.br",
+    "port": 22,
+    "pwd": "s3cr3t"
+  },
+  {
     "address": "srv02.infosec.dev.br",
     "port": 22,
     "pwd": "s3cr3t"
