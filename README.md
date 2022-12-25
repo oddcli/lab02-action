@@ -4,13 +4,13 @@ This GitHub action allows deploying an application to multiple virtual private s
 
 The action reads two JSON file lists, one with information about the VPS and another with the deploy commands, and uses the paramiko module to connect to each VPS and run the deploy commands.
 
-## Requirements
+## This action use:
 
 - [x] Python 3.6 or later
 
 - [x] paramiko module
 
-## Usage
+## Usage inputs:
 
 The action expects the following inputs to be provided:
 
@@ -27,7 +27,7 @@ The action expects the following inputs to be provided:
 
 The action reads the configuration files and then connects to each VPS in the list and runs the deploy commands. The action uses threads to concurrently deploy to multiple VPS.
 
-## Configuration files
+## Configuration files:
 
 Assuming we have the following configuration files:
 
@@ -85,7 +85,7 @@ A `vps_list.json` is a JSON file that contains a list of dictionaries, each dict
 ```
 ---
 
-## Usage example:
+## Usage example: :gear:
 
 The bellow snippet (yaml) execute the action assuming password in __pwd__ keys in `vps_list.json` as SSH auth method.
 
