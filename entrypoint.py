@@ -51,8 +51,16 @@ if __name__ == '__main__':
             with open(deploy_command_file, 'r') as f:
                 deploy_command = f.read()
     except:
-        print("Error reading deploy command file")
+        print("Error reading deploy commands")
 
-    for vps_info in vps_list:
-        deploy(vps_info, username, deploy_command, ssh_key)
-        
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        future_list = [executor.submit(deploy, vps_info, username, command, ssh_key) for vps_info in server_list]
+
+    for future in concurrent.futures.as_completed(future_list):
+        try:
+            result = future.result()
+        except Exception as error:
+            print(error)
+        else:
+            print(result)
+            
