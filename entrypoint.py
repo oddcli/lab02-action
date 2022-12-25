@@ -11,7 +11,7 @@ def threaded(func):
             try:
                 result = executor.submit(func, *args, **kwargs)
             except Exception as e:
-                print("Exception occurred:", e)
+                print("Exception occurred in 'executor.submit' on '@threaded' decorator:", e)
         return result
     return wrapper
 
@@ -56,7 +56,12 @@ if __name__ == '__main__':
         print("Error reading deploy commands")
 
     with concurrent.futures.ThreadPoolExecutor() as executor:
-        future_list = [executor.submit(deploy, vps_info, username, deploy_command, ssh_key) for vps_info in vps_list]
+        try:
+            future_list = [executor.submit(deploy, vps_info, username, deploy_command, ssh_key) for vps_info in vps_list]
+        except Exception as e:
+            print("Exception occurred in 'future_list' list comprehension:", e)
+        
+        #future_list = [executor.submit(deploy, vps_info, username, deploy_command, ssh_key) for vps_info in vps_list]
 
     for future in concurrent.futures.as_completed(future_list):
         try:
