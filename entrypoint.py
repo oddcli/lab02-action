@@ -51,13 +51,13 @@ if __name__ == '__main__':
     print(f"VPS_LIST_FILE = {vps_list_file}")
     print(f"DEPLOY_COMMAND = {deploy_command_file}")
     print(f"SSH_KEY = {ssh_key}")
-    print(f"USERNAME = {USERNAME}")
+    print(f"USERNAME = {username}")
     ###### FUCK DEBUG end
     try:
         with open(vps_list_file, 'r') as f:
             vps_list = json.load(f)
     except:
-        print("Error reading VPS list file")
+        print(f"Error reading VPS list file: {vps_list_file}")
 
     try:
         if os.path.isfile(deploy_command_file):
