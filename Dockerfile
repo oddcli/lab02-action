@@ -5,5 +5,6 @@ WORKDIR /
 # Install requirements.txt
 RUN pip install -U paramiko
 COPY entrypoint.py /entrypoint.py
-RUN chmod +x /entrypoint.py
+RUN chmod a+x /entrypoint.py
+RUN env
 ENTRYPOINT ["python3", "/entrypoint.py"]
