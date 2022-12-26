@@ -7,4 +7,4 @@ RUN pip install -U paramiko
 COPY entrypoint.py /app/entrypoint.py
 RUN chmod a+x /app/entrypoint.py
 RUN env
-ENTRYPOINT ["python3", "./entrypoint.py"]
+ENTRYPOINT ["python3", "entrypoint.py"]
