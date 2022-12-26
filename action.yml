@@ -26,4 +26,4 @@ runs:
     SSH_KEY: ${{ inputs.ssh_key }}
     VPS_LIST_FILE: ${{ inputs.vps_list_file }}
     DEPLOY_COMMAND: ${{ inputs.deploy_command }}
-  entrypoint: 'entrypoint.py'
+    
