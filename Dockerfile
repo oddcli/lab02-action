@@ -4,10 +4,10 @@ FROM python:3.9
 # Install requirements.txt
 RUN pip install -U paramiko
 
-ENV VPS_LIST_FILE="$VPS_LIST_FILE"
-ENV DEPLOY_COMMAND="$DEPLOY_COMMAND"
-ENV USERNAME="$USERNAME"
-ENV SSH_KEY="$SSH_KEY"
+ENV VPS_LIST_FILE=${{ inputs.vps_list_file }}
+ENV DEPLOY_COMMAND=${{ inputs.deploy_command }}
+ENV SSH_KEY=${{ inputs.ssh_key }}
+ENV USERNAME=${{ inputs.username }}
 
 RUN env && echo "$VPS_LIST_FILE $DEPLOY_COMMAND"
 
