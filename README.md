@@ -1,14 +1,34 @@
 # lab02-action
 
-This GitHub action allows deploying an application to multiple virtual private servers (VPS).
+A [GitHub action] to allow running commands in parallel on multiple servers via SSH.
 
-The action reads two JSON file lists, one with information about the VPS and another with the deploy commands, and uses the paramiko module to connect to each VPS and run the deploy commands.
+## Usage example: :gear:
 
-## This action use:
+The bellow snippet (yaml) execute the action assuming password in __pwd__ keys in `vps_list.json` as SSH auth method.
 
-- [x] Python 3.6 or later
+```yml
+- name: Deploy
+  uses: path/to/action
+  with:
+    vps_list_file: vps_list.json
+    deploy_command_file: deploy_commands.sh
+    username: ${{ secrets.USERNAME }}
 
-- [x] paramiko module
+```
+
+The bellow snippet (yaml) execute the action assuming RSA key in GitHub secret 'SSH_KEY' as SSH auth method, in this case all __pwd__ keys in `vps_list.json` are ignored.
+
+```yml
+- name: Deploy
+  uses: path/to/action
+  with:
+    vps_list_file: vps_list.json
+    deploy_command_file: deploy_commands.sh
+    ssh_key: ${{ secrets.SSH_KEY }}
+    username: ${{ secrets.USERNAME }}
+
+```
+---
 
 ## Usage inputs:
 
@@ -85,29 +105,7 @@ A `vps_list.json` is a JSON file that contains a list of dictionaries, each dict
 ```
 ---
 
-## Usage example: :gear:
+## This action use:
 
-The bellow snippet (yaml) execute the action assuming password in __pwd__ keys in `vps_list.json` as SSH auth method.
-
-```yml
-- name: Deploy
-  uses: path/to/action
-  with:
-    vps_list_file: vps_list.json
-    deploy_command_file: deploy_commands.sh
-    username: ${{ secrets.USERNAME }}
-
-```
-
-The bellow snippet (yaml) execute the action assuming RSA key in GitHub secret 'SSH_KEY' as SSH auth method, in this case all __pwd__ keys in `vps_list.json` are ignored.
-
-```yml
-- name: Deploy
-  uses: path/to/action
-  with:
-    vps_list_file: vps_list.json
-    deploy_command_file: deploy_commands.sh
-    ssh_key: ${{ secrets.SSH_KEY }}
-    username: ${{ secrets.USERNAME }}
-
-```
+- [x] Python 3.6 or later
+- [x] paramiko module
