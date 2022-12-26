@@ -1,5 +1,6 @@
-name: Deploy to VPS
-description: Deploys a software update to a list of VPS servers.
+name: SSH multithread action.
+description: Execute shell script via multithread in a list of VPS servers.
+
 inputs:
   vps_list_file:
     description: Path to a JSON file containing a list of VPS servers.
@@ -16,6 +17,12 @@ inputs:
 outputs:
   deployment_output:
     description: Output from the deployment command.
+
 runs:
-  using: docker
-  image: Dockerfile
+  using: 'docker'
+  image: 'Dockerfile'
+  env:
+    USERNAME: ${{ inputs.username }}
+    SSH_KEY: ${{ inputs.ssh_key }}
+    VPS_LIST_FILE: ${{ inputs.vps_list_file }}
+    DEPLOY_COMMAND: ${{ inputs.deploy_command }}
