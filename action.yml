@@ -19,9 +19,3 @@ outputs:
 runs:
   using: docker
   image: Dockerfile
-  args:
-    - entrypoint.py
-    - VPS_LIST_FILE=${{ inputs.vps_list_file }}
-    - DEPLOY_COMMAND=${{ inputs.deploy_command }}
-    - USERNAME=${{ inputs.username }}
-    - SSH_KEY=${{ inputs.ssh_key }}
