@@ -48,16 +48,18 @@ if __name__ == '__main__':
     ssh_key = os.environ["SSH_KEY"]
     username = os.environ["USERNAME"]
     ###### FUCK DEBUG start
+    
+    files = os.listdir()
+    print(f"[!] LISTA COMPLETA DE ARQUIVO -----------> {files}")
+    for file in files:
+        print(f"[!] ARQUIVO -----------> : {file}")
+        
+        
     print(f"VPS_LIST_FILE = {vps_list_file}")
     print(f"DEPLOY_COMMAND = {deploy_command_file}")
     print(f"SSH_KEY = {ssh_key}")
     print(f"USERNAME = {username}")
-    
-    
-    files = os.listdir()
-    for file in files:
-        print(f"[!] arquivo: {file}")
-        
+  
     ###### FUCK DEBUG end
     try:
         with open(vps_list_file, 'r') as f:
