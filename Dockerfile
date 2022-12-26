@@ -3,7 +3,7 @@
     # Set the working directory
     WORKDIR /app
     # Install requirements.txt
-    RUN pip install -U -r requirements.txt
+    RUN pip install -U paramiko
     # Copy the entrypoint script and make it executable
     COPY entrypoint.py .
     RUN chmod +x entrypoint.py
