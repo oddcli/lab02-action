@@ -17,11 +17,12 @@ outputs:
   deployment_output:
     description: Output from the deployment command.
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
+  using: docker
+  image: docker://./
   args:
     - entrypoint.py
     - VPS_LIST_FILE=${{ inputs.vps_list_file }}
     - DEPLOY_COMMAND=${{ inputs.deploy_command }}
     - USERNAME=${{ inputs.username }}
     - SSH_KEY=${{ inputs.ssh_key }}
+  dockerfile: Dockerfile
