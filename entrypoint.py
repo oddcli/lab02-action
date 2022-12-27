@@ -47,6 +47,8 @@ if __name__ == '__main__':
     deploy_command_file = os.environ["DEPLOY_COMMAND"]
     ssh_key = os.environ["SSH_KEY"]
     username = os.environ["USERNAME"]
+    
+    """
     ###### FUCK DEBUG start
     
     files = os.listdir()
@@ -61,6 +63,8 @@ if __name__ == '__main__':
     print(f"USERNAME = {username}")
   
     ###### FUCK DEBUG end
+    """
+
     try:
         with open(vps_list_file, 'r') as f:
             vps_list = json.load(f)
