@@ -32,7 +32,7 @@ The bellow snippet (yaml) execute the action assuming RSA key in GitHub secret '
 ```
 ---
 
-## Usage inputs:
+## Usage inputs: ✍️
 
 The action expects the following inputs to be provided:
 
@@ -49,7 +49,7 @@ The action expects the following inputs to be provided:
 
 The action reads the configuration files and then connects to each VPS in the list and runs the deploy commands. The action uses threads to concurrently deploy to multiple VPS.
 
-## Configuration files:
+## Configuration files: 🗃️
 
 Assuming we have the following configuration files:
 
@@ -107,7 +107,7 @@ A `vps_list.json` is a JSON file that contains a list of dictionaries, each dict
 ```
 ---
 
-## This action use:
+## This action use: 👾
 
 - [x] Python 3.6 or later
 - [x] paramiko module
