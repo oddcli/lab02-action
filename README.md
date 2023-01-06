@@ -4,7 +4,7 @@
 
 A [GitHub action] to allow running commands in parallel on multiple servers via SSH.
 
-## Usage example: :gear:
+## Usage example:
 
 The bellow snippet (yaml) execute the action assuming password in __pwd__ keys in `vps_list.json` as SSH auth method.
 
