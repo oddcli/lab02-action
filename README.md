@@ -1,3 +1,5 @@
+![Header](https://cdn.discordapp.com/attachments/997270112400838766/1060762701766348870/projectheadmaker_several_mechanical_tentacles_of_an_octopus_typ_e865b2b8-218d-4b05-aaca-4ea170a3ed59.png)
+
 # lab02-action
 
 A [GitHub action] to allow running commands in parallel on multiple servers via SSH.
